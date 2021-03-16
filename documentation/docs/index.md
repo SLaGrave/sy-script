@@ -2,6 +2,8 @@
 
 A small, incredibly useless language.
 
+[![github](https://img.shields.io/badge/Get%20it%20on-GitHub-orange)](https://github.com/SLaGrave/sy-script)
+
 ```
    _____                     _       _   
   / ____|                   (_)     | |  
