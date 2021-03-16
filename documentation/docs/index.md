@@ -23,6 +23,8 @@ Write a script and call it with syscript.py. A tutorial on the whole "write a sc
 $ python syscript ./hello.sy
 ```
 
+The SyParser python object can also be loaded into other project to allow usage of Sy code in python projects. Instructions coming soon (or you can peek around in syscript.py to see how that implements it).
+
 ## Why
 
 - I'm interested in writing programming languages.
