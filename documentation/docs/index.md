@@ -27,6 +27,6 @@ $ python syscript ./hello.sy
 
 - I'm interested in writing programming languages.
 
-- A coworking and I have frequently joked about using an abnormal or esoteric language for a project, so this is my attempt at writing a language to fit that description.
+- A coworker and I have frequently joked about using an abnormal or esoteric language for a project, so this is my attempt at writing a language to fit that description.
 
 - I liked the wiki article for [OISCs](https://en.wikipedia.org/wiki/One-instruction_set_computer).

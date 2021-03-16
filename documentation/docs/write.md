@@ -18,7 +18,7 @@ Because this language is terrible, comments are contained within chevrons -- `<<
 | --- | --- | --- |
 | sy | sy op1 op2 op3 op4; | Subtract op2 from op1, store difference in op3, jump to op4 |
 | leaf | leaf op1; | Define starting point of a branch location named op1 |
-| _ | sy op1 op2 _ op4; | If op4 is present, op3 must have something there (vice versa with op4). The underscore means "nothing" |
+| _ | sy op1 op2 _ op4; | Can be used in place of arg 3 or 4 -- means "nothing" |
 | stdin | sy stdin op2 op3 op4; | Gets a number from the stdin |
 | stdout | sy op1 op2 stout op4; | Prints ascii encoded symbol to stdout |
 
