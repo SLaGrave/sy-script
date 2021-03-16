@@ -1,0 +1,16 @@
+site_name: Sy Script
+
+nav:
+  - 'The Sy scripting language': index.md
+  - 'User Guide':
+    - Write Sy: write.md
+    - Style Sy: style.md
+  # - About:
+  - License: license.md
+
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: amber
+    accent: orange
