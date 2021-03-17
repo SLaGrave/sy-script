@@ -1,0 +1,18 @@
+leaf Input;
+sy stdin 0 in _;
+
+leaf Check;
+sy in 0 _ Zero;
+sy 0 0 _ One;
+
+leaf Zero;
+sy 48 0 stdout _;
+sy 10 0 stdout _;
+sy 0 0 _ End;
+
+leaf One;
+sy 49 0 stdout _;
+sy 10 0 stdout _;
+sy 0 0 _ One;
+
+leaf End;
