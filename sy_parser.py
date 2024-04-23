@@ -56,7 +56,7 @@ def _sy(idx, args, vars: dict, leafs: dict):
         return idx + 1
 
 
-class Parser():
+class SyParser():
     def __init__(self):
         self.data = ""
         self.vars = dict()
