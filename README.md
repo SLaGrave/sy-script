@@ -35,3 +35,9 @@ Because this language is terrible, comments are contained within chevrons -- `<<
 | _ | sy op1 op2 _ op4; | If op4 is present, op3 must have something there (vice versa with op4). The underscore means "nothing" |
 | stdin | sy stdin op2 op3 op4; | Gets a number from the stdin |
 | stdout | sy op1 op2 stout op4; | Prints ascii encoded symbol to stdout |
+
+---
+
+## Developer notes
+
+Use venv for development and usage (for now?)

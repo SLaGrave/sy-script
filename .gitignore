@@ -3,3 +3,6 @@ __pycache__/*
 
 # Ignore built site
 documentation/site/*
+
+# Ignore the env
+env/
