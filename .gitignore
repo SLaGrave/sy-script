@@ -2,7 +2,7 @@
 __pycache__/*
 
 # Ignore built site
-documentation/site/*
+site/site/*
 
 # Ignore the env
 env/
