@@ -15,6 +15,8 @@ A small, incredibly useless language.
          |___/                |_|        
 ```
 
+**Sy is (sorta?) back in development! More to come.**
+
 ## How
 
 Write a script and call it with syscript.py. A tutorial on the whole "write a script" step can be found [here](write.md).
