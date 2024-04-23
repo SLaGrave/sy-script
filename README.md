@@ -1,20 +1,35 @@
-# Sy Script
+# Syscript
 
-[![forthebadge](https://forthebadge.com/images/badges/contains-tasty-spaghetti-code.svg)](https://forthebadge.com)
+```
+   _____                     _       _   
+  / ____|                   (_)     | |  
+ | (___  _   _ ___  ___ _ __ _ _ __ | |_ 
+  \___ \| | | / __|/ __| '__| | '_ \| __|
+  ____) | |_| \__ \ (__| |  | | |_) | |_ 
+ |_____/ \__, |___/\___|_|  |_| .__/ \__|
+          __/ |               | |        
+         |___/                |_|        
+```
 
 A small, incredibly useless language.
 
----
-
 Inspired by [OISCs](https://en.wikipedia.org/wiki/One-instruction_set_computer), especially the subleq (subtract and branch if not equal to zero) command. Built to be a hard to use langauge which has an included Python 3 parser.
 
-## Usage
+---
 
-Write a script and call it with syscript.py
+## Project structure
 
-```sh
-$ python syscript ./hello.sy
-```
+This repo holds the two implementations of Syscript:
+- `implementations/pysy` - The (abandoned) Python implementation of Syscript
+- `implementations/sisy` - The new, Single Interpreted version of Syscript
+
+There is also an `examples/` directory which contains code examples.
+
+There is also the `site/` directory containing the GitHub Pages site for Syscript.
+
+There is also the `langtest/` directory containing tooling to test my implementations.
+
+---
 
 ## Syntax
 
@@ -35,9 +50,3 @@ Because this language is terrible, comments are contained within chevrons -- `<<
 | _ | sy op1 op2 _ op4; | If op4 is present, op3 must have something there (vice versa with op4). The underscore means "nothing" |
 | stdin | sy stdin op2 op3 op4; | Gets a number from the stdin |
 | stdout | sy op1 op2 stout op4; | Prints ascii encoded symbol to stdout |
-
----
-
-## Developer notes
-
-Use venv for development and usage (for now?)
