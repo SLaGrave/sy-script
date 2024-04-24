@@ -1,5 +1,7 @@
 <<This script generates an image in the PPM format>>
-<<TODO: Add more documentation>>
+
+<<Call with the following command:>>
+<<syscript [thisfile.sy] > image.ppm>>
 
 <<==============================>>
 
