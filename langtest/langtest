@@ -47,7 +47,10 @@ def run_test(test_dir, test_name: str, input_command: str) -> bool:
 @click.command(help="Run all language tests.")
 @click.help_option("--help", "-h")
 @click.option("-c", "--command")
-def run_all_tests(command: str):
+def run_all_tests(command: str = None):
+    if command is None:
+        print("--command option must be given. See --help for more.")
+        return
     langpath_dir = get_langtest_dir()
     test_dir = os.path.join(langpath_dir, "tests")
     test_names = get_all_test_names(test_dir)
