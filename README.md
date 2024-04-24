@@ -1,21 +1,8 @@
 # Syscript
 
-```
-   _____                     _       _   
-  / ____|                   (_)     | |  
- | (___  _   _ ___  ___ _ __ _ _ __ | |_ 
-  \___ \| | | / __|/ __| '__| | '_ \| __|
-  ____) | |_| \__ \ (__| |  | | |_) | |_ 
- |_____/ \__, |___/\___|_|  |_| .__/ \__|
-          __/ |               | |        
-         |___/                |_|        
-```
-
 A small, incredibly useless language.
 
 Inspired by [OISCs](https://en.wikipedia.org/wiki/One-instruction_set_computer), especially the subleq (subtract and branch if not equal to zero) command. Built to be a hard to use langauge which has an included Python 3 parser.
-
----
 
 ## Project structure
 
@@ -28,8 +15,6 @@ There is also an `examples/` directory which contains code examples.
 There is also the `site/` directory containing the GitHub Pages site for Syscript.
 
 There is also the `langtest/` directory containing tooling to test my implementations.
-
----
 
 ## Syntax
 
