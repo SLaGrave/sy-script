@@ -9,7 +9,7 @@ Inspired by [OISCs](https://en.wikipedia.org/wiki/One-instruction_set_computer),
 ## Project structure
 
 This repo holds the two implementations of Syscript:
-- `implementations/pysy` - The (abandoned) Python implementation of Syscript
+- `implementations/sypython` - The (abandoned) Python implementation of Syscript
 - `implementations/sisy` - The new, Single Interpreted version of Syscript
 
 There is also an `examples/` directory which contains code examples.
@@ -25,7 +25,7 @@ Run the language test suite by calling the `langtest/langtest` script and pass t
 For example, on MacOS, I use the following command:
 
 ```sh
-./langtest/langtest -c './implementations/pysy/syscript'
+./langtest/langtest -c './implementations/sypython/syscript'
 ```
 
 ---
