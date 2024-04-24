@@ -1,0 +1,67 @@
+<<This script generates an image in the PPM format>>
+
+<<==============================>>
+
+leaf SetupValues;
+
+sy 256 0 width _;
+sy 256 0 height _;
+
+<<==============================>>
+
+leaf PrintHeader;
+
+<<Print "P3\n">>
+sy 80 0 stdout _;
+sy 51 0 stdout _;
+sy 10 0 stdout _;
+
+<<Print "256 256\n">>
+sy 2 -48 stdout _;
+sy 5 -48 stdout _;
+sy 6 -48 stdout _;
+sy 32 0 stdout _;
+sy 2 -48 stdout _;
+sy 5 -48 stdout _;
+sy 6 -48 stdout _;
+sy 10 0 stdout _;
+
+<<Print "255\n">>
+sy 2 -48 stdout _;
+sy 5 -48 stdout _;
+sy 5 -48 stdout _;
+sy 10 0 stdout _;
+
+<<==============================>>
+
+leaf PrintRow;
+
+sy width 0 counter _;
+
+leaf PrintRed;
+sy 2 -48 stdout _;
+sy 5 -48 stdout _;
+sy 5 -48 stdout _;
+sy 32 0 stdout _;
+sy 0 -48 stdout _;
+sy 32 0 stdout _;
+sy 0 -48 stdout _;
+
+sy counter 1 counter EndPrintRow;
+sy 32 0 stdout _;
+sy 0 0 _ PrintRed;
+
+leaf EndPrintRow;
+
+sy 10 0 stdout _;
+
+<<==============================>>
+
+leaf HeightCheck;
+
+sy height 1 height End;
+sy 0 0 _ PrintRow;
+
+<<==============================>>
+
+leaf End;

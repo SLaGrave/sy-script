@@ -3,3 +3,9 @@ site/site/*
 
 # Ignore the env
 env/
+
+# Ignore .DS_Store (MacOS thing)
+.DS_Store
+
+# Ignore the test image made by examples/imageGen.sy
+image.ppm
