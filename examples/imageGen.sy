@@ -1,4 +1,5 @@
 <<This script generates an image in the PPM format>>
+<<TODO: Add more documentation>>
 
 <<==============================>>
 
@@ -38,18 +39,21 @@ leaf PrintRow;
 
 sy width 0 counter _;
 
-leaf PrintRed;
-sy 2 -48 stdout _;
-sy 5 -48 stdout _;
+leaf PrintColor;
+sy 8 -48 stdout _;
+sy 6 -48 stdout _;
+sy 32 0 stdout _;
+sy 1 -48 stdout _;
+sy 3 -48 stdout _;
 sy 5 -48 stdout _;
 sy 32 0 stdout _;
-sy 0 -48 stdout _;
-sy 32 0 stdout _;
-sy 0 -48 stdout _;
+sy 1 -48 stdout _;
+sy 9 -48 stdout _;
+sy 9 -48 stdout _;
 
 sy counter 1 counter EndPrintRow;
 sy 32 0 stdout _;
-sy 0 0 _ PrintRed;
+sy 0 0 _ PrintColor;
 
 leaf EndPrintRow;
 
