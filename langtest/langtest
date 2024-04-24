@@ -30,11 +30,13 @@ def get_all_test_names(test_dir):
     return return_value
 
 
-def run_test(test_dir, test_name: str) -> bool:
+def run_test(test_dir, test_name: str, input_command: str) -> bool:
     """Run a test and return whether it passed."""
     test_filename = os.path.join(test_dir, f"{test_name}.sy")
     case_filename = os.path.join(test_dir, f"{test_name}.case")
-    test_output = subprocess.run(["python", "./implementations/pysy/syscript", test_filename], capture_output=True)
+    process = input_command.split(" ")
+    process.append(test_filename)
+    test_output = subprocess.run(process, capture_output=True)
     with open(case_filename, 'r') as f:
         return str.encode(f.read()) == test_output.stdout
 
@@ -44,7 +46,8 @@ def run_test(test_dir, test_name: str) -> bool:
 #=============================================================================
 @click.command(help="Run all language tests.")
 @click.help_option("--help", "-h")
-def run_all_tests():
+@click.option("-c", "--command")
+def run_all_tests(command: str):
     langpath_dir = get_langtest_dir()
     test_dir = os.path.join(langpath_dir, "tests")
     test_names = get_all_test_names(test_dir)
@@ -60,7 +63,7 @@ def run_all_tests():
             # No desc file
             pass
         # Run Test
-        passed = run_test(test_dir, test)
+        passed = run_test(test_dir, test, command)
         if not passed:
             num_fails += 1
         print("OK" if passed else "Failed")
