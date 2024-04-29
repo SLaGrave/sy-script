@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::fs;
 use std::vec::Vec;
 
@@ -37,18 +38,20 @@ pub struct SyComment {
 
 fn main() {
     let unparsed_file = fs::read_to_string("./test.sy").expect("Cannot read file");
-    
+
     let file = SyParser::parse(Rule::program, &unparsed_file)
         .expect("Unsuccessful parse")
-        .next().unwrap();
+        .next()
+        .unwrap();
 
     //===================================================
     // Needed Vars
     //===================================================
-    let mut sy_comments: Vec<SyComment> = Vec::new();  // Not really used
+    let mut sy_comments: Vec<SyComment> = Vec::new(); // Not really used
     let mut sy_sys: Vec<SyCommandSy> = Vec::new();
     let mut sy_leafs: Vec<SyCommandLeaf> = Vec::new();
-    let mut sy_eof: i32 = 0;
+    let mut sy_eoi: u32 = 0;
+    let mut sy_vars: HashMap<String, i32> = HashMap::new();
 
     //===================================================
     // Get it going?
@@ -57,7 +60,9 @@ fn main() {
     for line in file.into_inner() {
         match line.as_rule() {
             Rule::comment => {
-                sy_comments.push( SyComment{ span: line.as_str().to_string() } );
+                sy_comments.push(SyComment {
+                    span: line.as_str().to_string(),
+                });
             }
             Rule::command_sy => {
                 let inner = line.into_inner();
@@ -65,37 +70,132 @@ fn main() {
                 for arg in inner {
                     match arg.as_rule() {
                         Rule::operand_noop => {
-                            args.push(SyOperand { noop: true, int: None, ident: None, });
+                            args.push(SyOperand {
+                                noop: true,
+                                int: None,
+                                ident: None,
+                            });
                         }
                         Rule::operand_integer => {
                             let s = arg.as_str().to_string();
                             let i = s.parse::<i32>().unwrap();
-                            args.push(SyOperand { noop: false, int: Some(i), ident: None, });
+                            args.push(SyOperand {
+                                noop: false,
+                                int: Some(i),
+                                ident: None,
+                            });
                         }
                         Rule::operand_identifier => {
                             let s = arg.as_str().to_string();
-                            args.push(SyOperand { noop: false, int: None, ident: Some(s), });
+                            args.push(SyOperand {
+                                noop: false,
+                                int: None,
+                                ident: Some(s),
+                            });
                         }
                         _ => {}
                     }
                 }
-                sy_sys.push( SyCommandSy{
+                sy_sys.push(SyCommandSy {
                     idx,
                     arg0: args.get(0).unwrap().clone(),
                     arg1: args.get(1).unwrap().clone(),
                     arg2: args.get(2).unwrap().clone(),
                     arg3: args.get(3).unwrap().clone(),
-                } );
+                });
                 idx += 1;
             }
             Rule::command_leaf => {
                 let ident = line.into_inner().next().unwrap().as_str().to_string();
-                sy_leafs.push( SyCommandLeaf{ idx, ident } );
+                sy_leafs.push(SyCommandLeaf { idx, ident });
             }
             Rule::EOI => {
-                println!("EOI is idx = {}.", idx);
+                sy_eoi = idx;
             }
             _ => {}
         }
     }
+
+    //===================================================
+    // Checks
+    //===================================================
+    if sy_sys.len() > sy_eoi as usize {
+        panic!("Something don't add up 1!");
+    }
+    for i in 0..sy_sys.len() {
+        let sy_at_i = sy_sys.get(i).unwrap();
+        if sy_at_i.idx != i as u32 {
+            panic!("Something don't add up 2!");
+        }
+    }
+
+    //===================================================
+    // Actual run
+    //===================================================
+    let mut PC: u32 = 0;
+    while PC != sy_eoi {
+        // Perform sy command at 0
+        let command = sy_sys.get(PC as usize).unwrap();
+        // Get Value 0
+        if command.arg0.noop {
+            panic!("Arg0 can't be an '_'.")
+        }
+        let value0: i32 = match command.arg0.int {
+            Some(x) => x,
+            None => *sy_vars.get(&command.arg0.ident.clone().unwrap()).unwrap(),
+        };
+        // Get Value 1
+        if command.arg1.noop {
+            panic!("Arg1 can't be an '_'.")
+        }
+        let value1: i32 = match command.arg1.int {
+            Some(x) => x,
+            None => *sy_vars.get(&command.arg1.ident.clone().unwrap()).unwrap(),
+        };
+        // Calc result
+        let result = value0 - value1;
+        // Find and Store result in value 2
+        if !command.arg2.noop {
+            match &command.arg2.ident {
+                Some(x) => {
+                    if x == "stdout" {
+                        println!("{}", result);
+                    }
+                    else {
+                        sy_vars.insert(x.to_string(), result);
+                    }
+                }
+                None => {
+                    panic!("Arg2 must be '_' or an identifier.")
+                }
+            }
+        }
+        // to to right location (arg3)
+        if command.arg3.noop {
+            PC += 1;
+        } else {
+            // get arg 3
+            match &command.arg3.ident {
+                Some(x) => {
+                    // Get leaf value
+                    let mut found = false;
+                    for leaf in &sy_leafs {
+                        if &leaf.ident == x {
+                            PC = leaf.idx;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if !found {
+                        panic!("Arg3 must be either '_' or a known identifier.")
+                    }
+                }
+                None => {
+                    panic!("Arg3 must be '_' or an identifier.")
+                }
+            }
+        }
+    }
+
+    println!("{:?}", sy_vars);
 }

@@ -1,6 +1,3 @@
-<<hmm>>
-sy 1 0 testIdent _;
-
-leaf TestLeaf;
-
-sy 1 0 testIdent _;
+sy 5 -1 stdout wow;
+leaf wow;
+sy 1 5 test _;
