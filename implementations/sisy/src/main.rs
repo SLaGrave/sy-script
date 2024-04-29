@@ -1,4 +1,3 @@
-// use std::collections::HashMap;
 use std::fs;
 use std::vec::Vec;
 
@@ -13,11 +12,13 @@ pub struct SyParser;
 pub enum SyLineType {
     COMMENT,
     COMMAND,
+    LEAF,
 }
 
 #[derive(Debug)]
 pub struct SyLine {
     _line_type: SyLineType,  // TODO: Remove underscore
+    _span: String,  // TODO: Remove underscore
 }
 
 fn main() {
@@ -32,11 +33,15 @@ fn main() {
     for line in file.into_inner() {
         match line.as_rule() {
             Rule::comment => {
-                let new_line = SyLine { _line_type: SyLineType::COMMENT };
+                let new_line = SyLine { _line_type: SyLineType::COMMENT, _span: line.as_str().to_string() };
                 lines.push(new_line);
             }
-            Rule::command => {
-                let new_line = SyLine { _line_type: SyLineType::COMMAND };
+            Rule::command_sy => {
+                let new_line = SyLine { _line_type: SyLineType::COMMAND, _span: line.as_str().to_string() };
+                lines.push(new_line);
+            }
+            Rule::command_leaf => {
+                let new_line = SyLine { _line_type: SyLineType::LEAF, _span: line.as_str().to_string() };
                 lines.push(new_line);
             }
             _ => {}

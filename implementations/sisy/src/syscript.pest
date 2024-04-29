@@ -4,8 +4,8 @@ operand_noop = { "_" }
 operand_stdin = { "stdin" }
 operand_stdout = { "stdout" }
 operand_integer = { ASCII_DIGIT+ }
-operand_identifier = { ASCII_ALPHA ~ (ASCII_ALPHANUMERIC)* }
-operand = { operand_noop | operand_stdin | operand_stdout | operand_integer | operand_identifier }
+operand_identifier = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC)* }
+operand = _{ operand_noop | operand_stdin | operand_stdout | operand_integer | operand_identifier }
 
 command_sy = {
     "sy" ~
@@ -16,6 +16,6 @@ command_sy = {
 }
 command_leaf = { "leaf" ~ WHITE_SPACE+ ~ operand_identifier }
 
-command = { (command_sy | command_leaf) ~ ";" }
+command = _{ (command_sy | command_leaf) ~ ";" }
 
 program = { SOI ~ (WHITE_SPACE | command | comment)* ~ EOI }
