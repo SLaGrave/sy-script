@@ -1,4 +1,6 @@
 <<hmm>>
-sy 1 0 _ _;
+sy 1 0 testIdent _;
 
 leaf TestLeaf;
+
+sy 1 0 testIdent _;
