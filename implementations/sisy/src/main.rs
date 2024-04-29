@@ -10,8 +10,8 @@ pub struct SyParser;
 
 #[derive(Debug, Clone)]
 pub struct SyOperand {
-    _noop: bool,
-    _int: Option<i32>,
+    noop: bool,
+    int: Option<i32>,
     ident: Option<String>,
 }
 
@@ -42,15 +42,22 @@ fn main() {
         .expect("Unsuccessful parse")
         .next().unwrap();
 
-    let mut comments: Vec<SyComment> = Vec::new();
-    let mut sys: Vec<SyCommandSy> = Vec::new();
-    let mut leafs: Vec<SyCommandLeaf> = Vec::new();
+    //===================================================
+    // Needed Vars
+    //===================================================
+    let mut sy_comments: Vec<SyComment> = Vec::new();  // Not really used
+    let mut sy_sys: Vec<SyCommandSy> = Vec::new();
+    let mut sy_leafs: Vec<SyCommandLeaf> = Vec::new();
+    let mut sy_eof: i32 = 0;
 
+    //===================================================
+    // Get it going?
+    //===================================================
     let mut idx = 0;
     for line in file.into_inner() {
         match line.as_rule() {
             Rule::comment => {
-                comments.push( SyComment{ span: line.as_str().to_string() } );
+                sy_comments.push( SyComment{ span: line.as_str().to_string() } );
             }
             Rule::command_sy => {
                 let inner = line.into_inner();
@@ -58,21 +65,21 @@ fn main() {
                 for arg in inner {
                     match arg.as_rule() {
                         Rule::operand_noop => {
-                            args.push(SyOperand { _noop: true, _int: None, ident: None, });
+                            args.push(SyOperand { noop: true, int: None, ident: None, });
                         }
                         Rule::operand_integer => {
                             let s = arg.as_str().to_string();
                             let i = s.parse::<i32>().unwrap();
-                            args.push(SyOperand { _noop: false, _int: Some(i), ident: None, });
+                            args.push(SyOperand { noop: false, int: Some(i), ident: None, });
                         }
                         Rule::operand_identifier => {
                             let s = arg.as_str().to_string();
-                            args.push(SyOperand { _noop: false, _int: None, ident: Some(s), });
+                            args.push(SyOperand { noop: false, int: None, ident: Some(s), });
                         }
                         _ => {}
                     }
                 }
-                sys.push( SyCommandSy{
+                sy_sys.push( SyCommandSy{
                     idx,
                     arg0: args.get(0).unwrap().clone(),
                     arg1: args.get(1).unwrap().clone(),
@@ -83,7 +90,7 @@ fn main() {
             }
             Rule::command_leaf => {
                 let ident = line.into_inner().next().unwrap().as_str().to_string();
-                leafs.push( SyCommandLeaf{ idx, ident } );
+                sy_leafs.push( SyCommandLeaf{ idx, ident } );
             }
             Rule::EOI => {
                 println!("EOI is idx = {}.", idx);
@@ -91,8 +98,4 @@ fn main() {
             _ => {}
         }
     }
-
-    println!("{:#?}", comments);
-    println!("{:#?}", sys);
-    println!("{:#?}", leafs);
 }
