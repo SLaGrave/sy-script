@@ -1,7 +1,6 @@
 site_name: Syscript
 
 nav:
-  - 'Syscript': index.md
   - 'User Guide':
     - Write Sy: write.md
     - Style Sy: style.md
