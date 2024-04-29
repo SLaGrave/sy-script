@@ -1,4 +1,4 @@
-comment = { "<<" ~ (WHITE_SPACE | ASCII)* ~ ">>" }
+comment = { "<<" ~ (WHITE_SPACE | ASCII_ALPHANUMERIC)* ~ ">>" }
 
 operand_noop = { "_" }
 operand_stdin = { "stdin" }
@@ -16,6 +16,6 @@ command_sy = {
 }
 command_leaf = { "leaf" ~ WHITE_SPACE+ ~ operand_identifier }
 
-command = { command_sy | command_leaf }
+command = { (command_sy | command_leaf) ~ ";" }
 
-program = { (WHITE_SPACE | command | comment)* }
+program = { SOI ~ (WHITE_SPACE | command | comment)* ~ EOI }
