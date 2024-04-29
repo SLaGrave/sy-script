@@ -1,6 +1,6 @@
 # MIT License
 
-**Copyright (c) 2021 *Sam LaGrave***
+**Copyright (c) 2021-2024 *Sam LaGrave***
 
 ---
 
