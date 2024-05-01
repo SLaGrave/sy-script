@@ -159,7 +159,7 @@ fn main() {
             match &command.arg2.ident {
                 Some(x) => {
                     if x == "stdout" {
-                        println!("{}", result);
+                        print!("{}", char::from_u32(result as u32).unwrap());
                     }
                     else {
                         sy_vars.insert(x.to_string(), result);
