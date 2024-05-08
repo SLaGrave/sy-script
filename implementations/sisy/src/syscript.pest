@@ -1,0 +1,19 @@
+comment = { "<<" ~ (WHITE_SPACE | ASCII_ALPHANUMERIC)* ~ ">>" }
+
+operand_noop = { "_" }
+operand_integer = { "-"? ~ ASCII_DIGIT+ }
+operand_identifier = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC)* }
+operand = _{ operand_noop | operand_integer | operand_identifier }
+
+command_sy = {
+    "sy" ~
+    WHITE_SPACE+ ~ operand ~
+    WHITE_SPACE+ ~ operand ~
+    WHITE_SPACE+ ~ operand ~
+    WHITE_SPACE+ ~ operand
+}
+command_leaf = { "leaf" ~ WHITE_SPACE+ ~ operand_identifier }
+
+command = _{ (command_sy | command_leaf) ~ ";" }
+
+program = { SOI ~ (WHITE_SPACE | command | comment)* ~ EOI }

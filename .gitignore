@@ -9,3 +9,6 @@ env/
 
 # Ignore the test image made by examples/imageGen.sy
 image.ppm
+
+# Build sisy exe(s)
+sisy.exe

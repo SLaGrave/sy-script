@@ -1,6 +1,4 @@
-# The Sy scripting language
-
-A small, incredibly useless language.
+# Syscript: A small language for insane people
 
 [![github](https://img.shields.io/badge/Get%20it%20on-GitHub-orange)](https://github.com/SLaGrave/sy-script)
 
@@ -15,17 +13,9 @@ A small, incredibly useless language.
          |___/                |_|        
 ```
 
-**Sy is (sorta?) back in development! More to come.**
+## Sy is back in development
 
-## How
-
-Write a script and call it with syscript.py. A tutorial on the whole "write a script" step can be found [here](write.md).
-
-```sh
-$ python syscript ./hello.sy
-```
-
-The SyParser python object can also be loaded into other project to allow usage of Sy code in python projects. Instructions coming soon (or you can peek around in syscript.py to see how that implements it).
+Development is underway on the next iteration on the Syscript concept! The `sisy` interpreter will soon become the standard implementation - this version will be a compiled program written in Rust which interprets sy files. Compared to the current Python implementation, it will be much faster. Because Python itself is interpreted, the sy code is basically interpreted twice, making it very slow. This new implementation is only Singly Interpreted (the name `sisy` itself means singly interpreted sy).
 
 ## Why
 
