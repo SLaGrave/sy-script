@@ -1,26 +1,18 @@
-leaf ControlVariables;
-sy 3 0 counter _;
+leaf Input;
+sy stdin 0 in _;
 
-<<Test comment>>
+leaf Check;
+sy in 0 _ Zero;
+sy 0 0 _ One;
 
-leaf PrintHelloWorld;
-sy 72 0 stdout _;
-sy 101 0 stdout _;
-sy 108 0 stdout _;
-sy 108 0 stdout _;
-sy 111 0 stdout _;
-sy 44 0 stdout _;
-sy 32 0 stdout _;
-sy 119 0 stdout _;
-sy 111 0 stdout _;
-sy 114 0 stdout _;
-sy 108 0 stdout _;
-sy 100 0 stdout _;
-sy 33 0 stdout _;
+leaf Zero;
+sy 48 0 stdout _;
 sy 10 0 stdout _;
+sy 0 0 _ End;
 
-leaf CounterChange;
-sy counter 1 counter End;
-sy 0 0 _ PrintHelloWorld;
+leaf One;
+sy 49 0 stdout _;
+sy 10 0 stdout _;
+sy 0 0 _ One;
 
 leaf End;

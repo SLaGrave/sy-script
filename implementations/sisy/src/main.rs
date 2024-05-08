@@ -1,9 +1,19 @@
 use std::collections::HashMap;
 use std::fs;
 use std::vec::Vec;
+use std::io;
+use std::io::Write;
 
 use pest::Parser;
 use pest_derive::Parser;
+
+fn read_stdin() -> i32 {
+    print!("> ");
+    io::stdout().flush().unwrap();
+    let mut input_line = String::new();
+    io::stdin().read_line(&mut input_line).expect("Failed to read line.");
+    input_line.trim().parse::<i32>().expect("Input not an integer")
+}
 
 #[derive(Parser)]
 #[grammar = "syscript.pest"]
@@ -142,7 +152,13 @@ fn main() {
         }
         let value0: i32 = match command.arg0.int {
             Some(x) => x,
-            None => *sy_vars.get(&command.arg0.ident.clone().unwrap()).unwrap(),
+            None => {
+                if &command.arg0.ident.clone().unwrap() == "stdin" {
+                    read_stdin()
+                } else {
+                    *sy_vars.get(&command.arg0.ident.clone().unwrap()).unwrap()
+                }
+            },
         };
         // Get Value 1
         if command.arg1.noop {
@@ -150,7 +166,13 @@ fn main() {
         }
         let value1: i32 = match command.arg1.int {
             Some(x) => x,
-            None => *sy_vars.get(&command.arg1.ident.clone().unwrap()).unwrap(),
+            None => {
+                if &command.arg1.ident.clone().unwrap() == "stdin" {
+                    read_stdin()
+                } else {
+                    *sy_vars.get(&command.arg1.ident.clone().unwrap()).unwrap()
+                }
+            },
         };
         // Calc result
         let result = value0 - value1;
