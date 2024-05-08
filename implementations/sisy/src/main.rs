@@ -1,9 +1,9 @@
 use std::collections::HashMap;
+use std::env;
 use std::fs;
-use std::vec::Vec;
 use std::io;
 use std::io::Write;
-use std::env;
+use std::vec::Vec;
 
 use pest::Parser;
 use pest_derive::Parser;
@@ -12,8 +12,13 @@ fn read_stdin() -> i32 {
     print!("> ");
     io::stdout().flush().unwrap();
     let mut input_line = String::new();
-    io::stdin().read_line(&mut input_line).expect("Failed to read line.");
-    input_line.trim().parse::<i32>().expect("Input not an integer")
+    io::stdin()
+        .read_line(&mut input_line)
+        .expect("Failed to read line.");
+    input_line
+        .trim()
+        .parse::<i32>()
+        .expect("Input not an integer")
 }
 
 #[derive(Parser)]
@@ -50,7 +55,8 @@ pub struct SyComment {
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let unparsed_file = fs::read_to_string(args.get(1).expect("You need to give an argument")).expect("Cannot read file");
+    let unparsed_file = fs::read_to_string(args.get(1).expect("You need to give an argument"))
+        .expect("Cannot read file");
 
     let file = SyParser::parse(Rule::program, &unparsed_file)
         .expect("Unsuccessful parse")
@@ -161,7 +167,7 @@ fn main() {
                 } else {
                     *sy_vars.get(&command.arg0.ident.clone().unwrap()).unwrap()
                 }
-            },
+            }
         };
         // Get Value 1
         if command.arg1.noop {
@@ -175,7 +181,7 @@ fn main() {
                 } else {
                     *sy_vars.get(&command.arg1.ident.clone().unwrap()).unwrap()
                 }
-            },
+            }
         };
         // Calc result
         let result = value0 - value1;
@@ -185,8 +191,7 @@ fn main() {
                 Some(x) => {
                     if x == "stdout" {
                         print!("{}", char::from_u32(result as u32).unwrap());
-                    }
-                    else {
+                    } else {
                         sy_vars.insert(x.to_string(), result);
                     }
                 }
