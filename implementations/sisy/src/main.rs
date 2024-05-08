@@ -44,7 +44,7 @@ pub struct SyCommandLeaf {
 
 #[derive(Debug)]
 pub struct SyComment {
-    span: String,
+    _span: String,
 }
 
 fn main() {
@@ -74,7 +74,7 @@ fn main() {
         match line.as_rule() {
             Rule::comment => {
                 sy_comments.push(SyComment {
-                    span: line.as_str().to_string(),
+                    _span: line.as_str().to_string(),
                 });
             }
             Rule::command_sy => {
