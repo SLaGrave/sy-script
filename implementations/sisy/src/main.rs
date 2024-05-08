@@ -3,6 +3,7 @@ use std::fs;
 use std::vec::Vec;
 use std::io;
 use std::io::Write;
+use std::env;
 
 use pest::Parser;
 use pest_derive::Parser;
@@ -47,7 +48,9 @@ pub struct SyComment {
 }
 
 fn main() {
-    let unparsed_file = fs::read_to_string("./test.sy").expect("Cannot read file");
+    let args: Vec<String> = env::args().collect();
+
+    let unparsed_file = fs::read_to_string(args.get(1).expect("You need to give an argument")).expect("Cannot read file");
 
     let file = SyParser::parse(Rule::program, &unparsed_file)
         .expect("Unsuccessful parse")
