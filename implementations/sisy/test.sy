@@ -1,3 +1,9 @@
+leaf ControlVariables;
+sy 3 0 counter _;
+
+<<Test comment>>
+
+leaf PrintHelloWorld;
 sy 72 0 stdout _;
 sy 101 0 stdout _;
 sy 108 0 stdout _;
@@ -12,3 +18,9 @@ sy 108 0 stdout _;
 sy 100 0 stdout _;
 sy 33 0 stdout _;
 sy 10 0 stdout _;
+
+leaf CounterChange;
+sy counter 1 counter End;
+sy 0 0 _ PrintHelloWorld;
+
+leaf End;

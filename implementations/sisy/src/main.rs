@@ -170,8 +170,8 @@ fn main() {
                 }
             }
         }
-        // to to right location (arg3)
-        if command.arg3.noop {
+        // jump to right location (arg3)
+        if result > 0 || command.arg3.noop {
             PC += 1;
         } else {
             // get arg 3
@@ -196,6 +196,4 @@ fn main() {
             }
         }
     }
-
-    println!("{:?}", sy_vars);
 }
