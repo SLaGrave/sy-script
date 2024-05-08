@@ -145,10 +145,10 @@ fn main() {
     //===================================================
     // Actual run
     //===================================================
-    let mut PC: u32 = 0;
-    while PC != sy_eoi {
+    let mut pc: u32 = 0;
+    while pc != sy_eoi {
         // Perform sy command at 0
-        let command = sy_sys.get(PC as usize).unwrap();
+        let command = sy_sys.get(pc as usize).unwrap();
         // Get Value 0
         if command.arg0.noop {
             panic!("Arg0 can't be an '_'.")
@@ -197,7 +197,7 @@ fn main() {
         }
         // jump to right location (arg3)
         if result > 0 || command.arg3.noop {
-            PC += 1;
+            pc += 1;
         } else {
             // get arg 3
             match &command.arg3.ident {
@@ -206,7 +206,7 @@ fn main() {
                     let mut found = false;
                     for leaf in &sy_leafs {
                         if &leaf.ident == x {
-                            PC = leaf.idx;
+                            pc = leaf.idx;
                             found = true;
                             break;
                         }
