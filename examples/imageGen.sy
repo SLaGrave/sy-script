@@ -1,25 +1,18 @@
 <<This script generates an image in the PPM format>>
 
-<<Call with the following command:>>
-<<syscript [thisfile.sy] > image.ppm>>
-
-<<==============================>>
-
 leaf SetupValues;
 
 sy 256 0 width _;
 sy 256 0 height _;
 
-<<==============================>>
-
 leaf PrintHeader;
 
-<<Print "P3\n">>
+<<Print P3>>
 sy 80 0 stdout _;
 sy 51 0 stdout _;
 sy 10 0 stdout _;
 
-<<Print "256 256\n">>
+<<Print 256 256>>
 sy 2 -48 stdout _;
 sy 5 -48 stdout _;
 sy 6 -48 stdout _;
@@ -29,13 +22,11 @@ sy 5 -48 stdout _;
 sy 6 -48 stdout _;
 sy 10 0 stdout _;
 
-<<Print "255\n">>
+<<Print 255>>
 sy 2 -48 stdout _;
 sy 5 -48 stdout _;
 sy 5 -48 stdout _;
 sy 10 0 stdout _;
-
-<<==============================>>
 
 leaf PrintRow;
 
@@ -61,13 +52,9 @@ leaf EndPrintRow;
 
 sy 10 0 stdout _;
 
-<<==============================>>
-
 leaf HeightCheck;
 
 sy height 1 height End;
 sy 0 0 _ PrintRow;
-
-<<==============================>>
 
 leaf End;
