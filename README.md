@@ -29,11 +29,5 @@ Run the language test suite by calling the `langtest/langtest` script and pass t
 For example, on MacOS, I use the following command:
 
 ```sh
-./langtest/langtest -c './implementations/sypython/syscript'
+./langtest/langtest -c './sisy'
 ```
-
-## Building the site
-
-The site should only be build from the `implementation/rust` branch since that contains the experimental pages.
-
-Also, the top level environment should be active (see requirements.txt).
